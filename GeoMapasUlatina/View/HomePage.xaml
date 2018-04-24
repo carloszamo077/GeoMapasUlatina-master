@@ -1,0 +1,106 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<TabbedPage xmlns="http://xamarin.com/schemas/2014/forms" 
+             x:Name="HomePage"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             x:Class="GeoMapasUlatina.View.HomePage"
+             xmlns:converters="clr-namespace:GeoMapasUlatina.Helpers">
+    <ContentPage Title="Lista Restaurantes" >
+        <ContentPage.Padding>
+            <OnPlatform
+                x:TypeArguments="Thickness"
+                iOS="30"
+                Android="10"/>
+        </ContentPage.Padding>
+        <ContentPage.Content>
+            <StackLayout>
+                <SearchBar Placeholder="Restaurantes..."  TextChanged="SearchBar_TextChanged"></SearchBar>
+                <ListView x:Name="lstUbic" ItemsSource="{Binding lstUbicaciones}" HasUnevenRows="true"
+                          IsPullToRefreshEnabled="True"
+                          RefreshCommand="{Binding RefreshCommand}"
+                          IsRefreshing="{Binding IsRefreshing}">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <StackLayout>
+                                    <StackLayout Orientation="Horizontal">
+                                        <Label Text="{Binding Title}" FontSize="16" TextColor="Navy" FontAttributes="Bold" VerticalTextAlignment="Start"/>
+                                        <Image Source="{Binding Imagen}" HorizontalOptions="EndAndExpand" HeightRequest="20" WidthRequest="20"/>
+                                    </StackLayout>
+                                    <StackLayout Orientation="Horizontal" VerticalOptions="Start">
+                                        <Label Text="{Binding Direccion}" FontSize="10" VerticalTextAlignment="Center"/>
+                                    </StackLayout>
+                                    <Button Text="Ir" Image="waze.png" Command="{Binding Path=BindingContext.NavegarWazeCommand, Source={x:Reference HomePage}}" 
+                                            CommandParameter="{Binding LocalID}"></Button>
+                                   
+                                </StackLayout>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </StackLayout>
+        </ContentPage.Content>
+    </ContentPage>
+    <ContentPage Title="Lista Restaurantes BD" >
+        <ContentPage.Content>
+            <StackLayout>
+                <ListView x:Name="lstUbicDB"
+                          ItemsSource="{Binding lstUbicacionesTmp}" BackgroundColor="Gray" HasUnevenRows="true"
+                          IsPullToRefreshEnabled="True"
+                          RefreshCommand="{Binding RefreshCommand}"
+                          IsRefreshing="{Binding IsRefreshing}">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <Frame HasShadow="true" Margin="5">
+                                    <StackLayout>
+                                        <StackLayout.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding Path=BindingContext.VerUbicacionCommand, Source={x:Reference HomePage}}"
+                                                      CommandParameter="{Binding LocalID}"/>
+                                        </StackLayout.GestureRecognizers>
+                                        <StackLayout Orientation="Horizontal">
+                                            <Label Text="{Binding Title}" FontSize="30" TextColor="Navy" FontAttributes="Bold" VerticalTextAlignment="Start"/>
+                                            <Image Source="{Binding ImageSource}" HorizontalOptions="EndAndExpand" HeightRequest="50" WidthRequest="50"/>
+                                        </StackLayout>
+                                        <StackLayout Orientation="Horizontal" VerticalOptions="Start">
+                                            <Label Text="{Binding Direccion}" FontSize="10" VerticalTextAlignment="Center"/>
+                                        </StackLayout>
+                                    </StackLayout>
+                                </Frame>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </StackLayout>
+        </ContentPage.Content>
+    </ContentPage>
+    <ContentPage Title="Lista Usuarios">
+        <ContentPage.Content>
+            <StackLayout>
+                <ListView x:Name="lstUsrDB"
+                          ItemsSource="{Binding lstUsuarios}" BackgroundColor="Gray" HasUnevenRows="true"
+                          IsPullToRefreshEnabled="True"
+                          RefreshCommand="{Binding RefreshCommand}"
+                          IsRefreshing="{Binding IsRefreshing}">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <Frame HasShadow="true" Margin="5">
+                                    <StackLayout>
+                                        <StackLayout Orientation="Horizontal">
+                                            <Image Source="{Binding ImageSource}"  HeightRequest="80" WidthRequest="100" />
+                                            <Label Text="{Binding FullName}" FontSize="20" TextColor="Navy" FontAttributes="Bold" VerticalTextAlignment="End"/>
+                                        </StackLayout>
+                                        <StackLayout Orientation="Horizontal"  >
+                                            <Label VerticalOptions="Start"/>
+                                            <Label Text="{Binding Email}" FontSize="15" HorizontalOptions="CenterAndExpand" />
+                                        </StackLayout>
+                                    </StackLayout>
+                                </Frame>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </StackLayout>
+        </ContentPage.Content>
+    </ContentPage>
+</TabbedPage>

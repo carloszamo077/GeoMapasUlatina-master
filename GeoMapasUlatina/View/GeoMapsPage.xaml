@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+    xmlns:maps="clr-namespace:Xamarin.Forms.Maps;assembly=Xamarin.Forms.Maps"
+    x:Class="GeoMapasUlatina.View.GeoMapsPage">
+    <ScrollView>
+        <StackLayout
+            Padding="20">
+            <maps:Map 
+                    x:Name="MyMap"
+                    IsShowingUser="true"
+                    MapType="Street"  
+                    WidthRequest="320" 
+                    HeightRequest="200">
+            </maps:Map>
+            <StackLayout>
+                <StackLayout Orientation="Horizontal">
+                    <!-- <Label Text="Latitud: " FontAttributes="Bold"/>-->
+                    <Label x:Name="Lat" Text="{Binding UbicacionActual.Latitud}" IsVisible="false"/>
+                    <!--<Label Text="Longitud: " FontAttributes="Bold"/>-->
+                    <Label x:Name="Lon" Text="{Binding UbicacionActual.Longitud}" IsVisible="false"/>
+                    <Label x:Name="Dir" Text="{Binding UbicacionActual.Direccion}" IsVisible="false"/>
+                    <Label x:Name="Tit" Text="{Binding UbicacionActual.Title}" IsVisible="false"/>
+                    <Label x:Name="Imagen" Text="{Binding UbicacionActual.Imagen}" IsVisible="false"/>
+                </StackLayout>
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="Nombre:" FontAttributes="Bold"/>
+                    <Entry x:Name="Titulo" Text="{Binding Title, Mode=TwoWay}" Placeholder="Ingrese un nombre" HorizontalOptions="StartAndExpand"/>
+                </StackLayout>
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="Dirección:" FontAttributes="Bold"/>
+                    <Entry x:Name="Direccion" Text="{Binding Direccion, Mode=TwoWay}" Placeholder="Ingrese una dirección" HorizontalOptions="StartAndExpand"/>
+                </StackLayout>
+                <StackLayout Orientation="Horizontal">
+                    <Frame CornerRadius="10" BackgroundColor="Silver" HorizontalOptions="CenterAndExpand" >
+                        <Image Source="{Binding ImageSource}" HeightRequest="250" WidthRequest="250" />
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding ChangeImageCommand}" />
+                        </Image.GestureRecognizers>
+                    </Frame>
+                </StackLayout>
+                <StackLayout Orientation="Horizontal">
+                    <!-- <Button 
+                        Text="Ubicame" 
+                        Command="{Binding CargarUbicacion}"
+                        HorizontalOptions="FillAndExpand"
+                        Clicked="Handle_Clicked_Ubicame" /> -->
+                    <!--<Button 
+                        Text="Agregar Foto" 
+                        Command="{Binding AgregarFotoCommand}" 
+                        Clicked="Handle_Clicked_Camera"
+                        HorizontalOptions="FillAndExpand"/> -->
+                    <Button 
+                        Text="Guardar Restaurante" 
+                        Command="{Binding GuardarCommand}" 
+                        Clicked="Handle_Clicked_Guardar"
+                        HorizontalOptions="FillAndExpand"/>
+                </StackLayout>
+                <Label x:Name="messageLabel" TextColor="Red"/>
+            </StackLayout>
+        </StackLayout>
+    </ScrollView>
+</ContentPage>

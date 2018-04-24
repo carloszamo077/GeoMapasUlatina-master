@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="GeoMapasUlatina.View.SignUpPage">
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout VerticalOptions="StartAndExpand">
+            <Frame CornerRadius="10" BackgroundColor="Silver" HorizontalOptions="CenterAndExpand" >
+                <Image Source="{Binding ImageSource}" HeightRequest="250" WidthRequest="250"/>
+                <Image.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding Path=ChangeImageCommand}"/>
+                </Image.GestureRecognizers>
+            </Frame>
+            <Label Text="Usuario" />
+            <Entry Placeholder="Usuario" Text="{Binding usernameEntry, Mode=TwoWay}" />
+            <Label Text="Nombre completo" />
+            <Entry Placeholder="Nombre completo" Text="{Binding fullNameEntry, Mode=TwoWay}"/>
+            <Label Text="Email" />
+            <Entry Placeholder="Email" Text="{Binding emailEntry, Mode=TwoWay}"/>
+            <Label Text="Contraseña" />
+            <Entry IsPassword="true" Placeholder="Contraseña" Text="{Binding passwordEntry, Mode=TwoWay}"/>
+            <Label Text="Confirmar contraseña" />
+            <Entry IsPassword="true" Placeholder="Confirmar contraseña" Text="{Binding confirmPasswordEntry, Mode=TwoWay}"/>
+            <Button Text="Registrar" Command="{Binding GuardarCommand}" />
+            <Label  TextColor="Red" Text="{Binding message}"/>
+        </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

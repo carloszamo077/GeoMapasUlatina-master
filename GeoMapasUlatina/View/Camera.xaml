@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="GeoMapasUlatina.View.Camera"
+             x:Name="Camera">
+    <ContentPage.Padding>
+        <OnPlatform
+                x:TypeArguments="Thickness"
+                iOS="30"
+                Android="10"/>
+    </ContentPage.Padding>
+    <ContentPage.Content>
+        <StackLayout BackgroundColor="Navy">
+            <Frame CornerRadius="10" BackgroundColor="Silver">
+                <Image Source="{Binding ImageSource}"/>
+                <Image.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding Path=ChangeImageCommand}"/>
+                </Image.GestureRecognizers>
+            </Frame>
+            <Button Text="Guardar" Command="{Binding GuardarCommand}"/>
+            <StackLayout>
+                <Label Text="Mis imagenes:" TextColor="White"/>
+                <ListView x:Name="lstImagenes" ItemsSource="{Binding lstImagenes}"
+                          IsPullToRefreshEnabled="True"
+                          RefreshCommand="{Binding RefreshCommand}"
+                          IsRefreshing="{Binding IsRefreshing}">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <StackLayout Orientation="Horizontal">
+                                    <StackLayout.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding Path=BindingContext.VerImagenCommand, Source={x:Reference Camera}}"
+                                                      CommandParameter="{Binding imageId}"/>
+                                    </StackLayout.GestureRecognizers>
+                                    <Label Text="Imagen: " TextColor="White"/>
+                                    <Label Text="{Binding imageId}" TextColor="White"/>
+                                    <Label Text=", " TextColor="White"/>
+                                    <Label Text="{Binding imageName}" TextColor="White"/>
+                                    <Image>
+                                    </Image>
+                                </StackLayout>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

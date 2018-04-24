@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="GeoMapasUlatina.View.LoginPage"
+             Title="Login">
+    <ContentPage.ToolbarItems>
+        
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <StackLayout VerticalOptions="CenterAndExpand">
+            <Label Text="Usuario" />
+            <Entry x:Name="usernameEntry" Placeholder="Ingrese el usuario"/>
+            <Label Text="Contraseña" />
+            <Entry x:Name="passwordEntry" IsPassword="true"  Placeholder="Ingrese la contraseña"/>
+            <Button Text="Ingresar" Clicked="OnLoginButtonClicked" />
+            <Button Text="Registrar" Clicked="OnSignUpButtonClicked" />
+            <Label x:Name="messageLabel" TextColor="Red"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
+   
